@@ -4,6 +4,7 @@ import Register from "./Register";
 import InspectionStart from "./InspectionStart";
 import InspectionList from "./Inspection/InspectionList";
 import InspectionTable from "./Inspection/InspectionTable";
+import UpdateInspection from "./Inspection/UpdateInsception";
 
 export {
     
@@ -13,5 +14,6 @@ export {
     InspectionStart,
     InspectionList,
     InspectionTable,
+    UpdateInspection,
 
 };

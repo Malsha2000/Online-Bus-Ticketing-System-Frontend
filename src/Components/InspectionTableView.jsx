@@ -14,6 +14,7 @@ const InspectionTableView = () => {
 		type: "",
 	});
 
+    
     const [updateClicked, setUpdateClicked] = useState(false);
     const [routeId, setRouteId] = useState("");
     const [date, setDate] = useState("");

@@ -26,7 +26,7 @@ const InspectionList = () => {
 
     useEffect(() => {
         const fetchInspections = async () => {
-            const res = await axios.get("/api/inspection/all");
+            const res = await axios.get("http://localhost:5000/api/inspection/all");
             setInspections(res.data);
             console.log(res.data);
         };
@@ -38,22 +38,13 @@ const InspectionList = () => {
         <>
             
             <Header toggle={toggle} />
-            <div className="flex justify-between">
+            <div className="flex justify-center">
                 <h1 className="text-black font-bold px-10 pt-5 text-5xl">
                     Inspection Details
                 </h1>
-                {/* {localStorage.getItem("role") === "admin" ? (
-                    <button
-                        class="
-                bg-green-600 hover:bg-green-800 text-white font-bold py-3 px-8 flex sm rounded-full mb-3 mr-10 mt-5"
-                        onClick={addInspection}>
-                        Add New Event
-                    </button>
-                ) : (
-                    <div></div>
-                )} */}
+                
             </div>
-            <div className="w-full py-10 pl-28 gap-4 flex-wrap flex justify-start">
+            <div className="w-full py-10 pl-28 gap-4 flex-wrap flex justify-start mt-10">
                 {inspections.map((inspection) => (
                     <InspectionCard inspection={inspection} />
                 ))}
@@ -65,3 +56,4 @@ const InspectionList = () => {
 };
 
 export default InspectionList;
+

@@ -7,6 +7,7 @@ import InspectionAdd from "../Pages/inspectionAdd";
 import InspectionStart from "../Pages/InspectionStart";
 import InspectionList from "../Pages/Inspection/InspectionList";
 import InspectionTable from "../Pages/Inspection/InspectionTable";
+import UpdateInspection from "../Pages/Inspection/UpdateInsception";
 
 
 const PageRoutes = () => {
@@ -20,6 +21,10 @@ const PageRoutes = () => {
 					<Route path='/inspection/card' element={<InspectionStart/>}></Route>
 					<Route path="/inspections" element={<InspectionList />} />
 					<Route path="/inspection/all" element={<InspectionTable />} />
+					<Route
+                            path="/inspection/update/:id"
+                            element={<UpdateInspection />}
+                        />
 				</Routes>
 			</BrowserRouter>
 		</div>

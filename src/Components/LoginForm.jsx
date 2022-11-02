@@ -65,10 +65,9 @@ export default function LoginForm() {
 									<p class="text-4xl mb-0 mr-4">
 										WELCOME BACK
 									</p>
-
 								</div>
 								<div class="flex flex-row items-center justify-center lg:justify-start">
-								<h3>Login to your account</h3>
+									<h3>Login to your account</h3>
 								</div>
 								<div class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"></div>
 
@@ -98,10 +97,10 @@ export default function LoginForm() {
 									/>
 								</div>
 								<a
-											href="/user/add"
-											class="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out ml-60">
-											Forgot Password ?
-										</a>
+									href="/user/add"
+									class="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out ml-60">
+									Forgot Password ?
+								</a>
 								<div class="text-center lg:text-left">
 									<button
 										type="submit"
@@ -110,7 +109,7 @@ export default function LoginForm() {
 										Login
 									</button>
 									<p class="text-sm font-semibold mt-2 pt-1 mb-0">
-										Don't have an account? 
+										Don't have an account?
 										<a
 											href="/user/add"
 											class="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out">

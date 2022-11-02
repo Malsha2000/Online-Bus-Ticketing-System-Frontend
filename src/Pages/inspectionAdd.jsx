@@ -15,8 +15,13 @@ function InspectionAdd() {
 		setIsOpen(!isOpen);
 	};
 
+	const [notify, setNotify] = useState({
+		isOpen: false,
+		message: "",
+		type: "",
+	});
 
-    const [open, setOpen] = useState(false);
+	const [open, setOpen] = useState(false);
 
 	const handletime = (newTime) => {
 		setTime(newTime);
@@ -24,39 +29,39 @@ function InspectionAdd() {
 
 	const navigate = useNavigate();
 
- 	const [inspectionID, setInspectionID] = useState("");
-    const [routeId, setRouteId] = useState("");
+	const [inspectionID, setInspectionID] = useState("");
+	const [routeId, setRouteId] = useState("");
 	const [time, setTime] = useState("");
 	const [date, setDate] = useState(new Date());
 	const [inspectorName, setInspectorName] = useState("");
 	const [enquiries, setEnquiries] = useState("");
-    const [inspections, setInspections] = useState("");
-
-
+	const [inspections, setInspections] = useState("");
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
 
-		console.log(localStorage.getItem("authToken"));
-
 		try {
 			await axios
 				.post("http://localhost:5000/api/inspection/add", {
-					headers: {
-						authToken: localStorage.getItem("authToken"),
-					},
-
 					inspectionID: inspectionID,
-                    routeId: routeId,
-                    time: time,
+					routeId: routeId,
+					time: time,
 					date: date,
 					inspectorName: inspectorName,
 					enquiries: enquiries,
-
 				})
 				.then((res) => {
-					console.log("add user res", res);
-					navigate("/inspection/all");
+					setNotify({
+						isOpen: true,
+						message: "Inspection added successfully",
+						type: "success",
+					});
+					setInterval(() => {
+						navigate("/inspection/all");
+					}, 2500);
+
+					// console.log("add user res", res);
+					// navigate("/inspection/all");
 				})
 				.catch((err) => {
 					console.log(err);
@@ -65,30 +70,6 @@ function InspectionAdd() {
 			console.log(error);
 		}
 	};
-
-
-    // const columns = [
-		
-	// 	{ title: "Inspection ID", field: "inspectionId" },
-	// 	{ title: "Route ID", field: "routeId" },
-	// 	{ title: "Date", field: "date" },
-	// 	{ title: "Time", field: "time" },
-	// 	{ title: "Inspector Name", field: "inspectorName" },
-	// 	{ title: "Enquiries", field: "enquiries" },
-	// ];
-
-	// const downLoadPdf = () => {
-	// 	const doc = new jsPDF();
-	// 	doc.text(" All Inspection Details", 50, 10);
-	// 	doc.autoTable({
-	// 		columns: columns.map((col) => ({
-	// 			...col,
-	// 			dataKey: col.field,
-	// 		})),
-	// 		body: inspections,
-	// 	});
-	// 	doc.save("All Inspection Details");
-	// };
 
 	return (
 		<>
@@ -103,22 +84,6 @@ function InspectionAdd() {
 					<form
 						className="bg-white rounded px-8 pt-6 pb-8 mb-8 shadow-md"
 						onSubmit={onSubmit}>
-						{/* <div class="mb-6">
-									<label
-										class="block text-gray-700 text-sm font-bold mb-2 text-left"
-										for="EmpID">
-										Inspection ID
-									</label>
-							<input
-								class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-1 focus:outline-red-300 focus:shadow-outline"
-								id="firstname"
-								type="text"
-								placeholder=""
-								onChange={(e) => setInspectionID(e.target.value)}
-								required
-							/>
-						</div> */}
-
 						<div class="mb-6">
 							<label
 								class="block text-gray-700 text-sm font-bold mb-2 text-left"
@@ -143,32 +108,19 @@ function InspectionAdd() {
 								for="LastName">
 								Date
 							</label>
-                            <DatePicker selected={date} onChange={(date) => setDate(date)} 
-                            style={{
-														background:
-															"transparent",
-														border: "none",
-														borderBottom:
-															"2px solid #265673",
-														marginTop: "10px",
-														width: "100%",
-														color: "#265673",
-													}}/>
-                            {/* <DatePicker selected={date} onChange={(start_date:Date) => setDate(date)} /> */}
-							{/* <input
-								class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-1 focus:outline-red-300 focus:shadow-outline"
-								id="lastname"
-								type="text"
-								placeholder=""
-								onChange={(e) =>
-									setDate(e.target.value)
-								}
-								required
-							/> */}
+							<DatePicker
+								selected={date}
+								onChange={(date) => setDate(date)}
+								style={{
+									background: "transparent",
+									border: "none",
+									borderBottom: "2px solid #265673",
+									marginTop: "10px",
+									width: "100%",
+									color: "#265673",
+								}}
+							/>
 						</div>
-
-
-
 
 						<div class="mb-6">
 							<label
@@ -176,7 +128,7 @@ function InspectionAdd() {
 								for="email">
 								Time
 							</label>
-                        
+
 							<input
 								class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-1 focus:outline-red-300 focus:shadow-outline"
 								id="email"
@@ -186,7 +138,6 @@ function InspectionAdd() {
 								required
 							/>
 						</div>
-
 
 						<div class="mb-6">
 							<label
@@ -217,7 +168,9 @@ function InspectionAdd() {
 								id="nic"
 								type="text"
 								placeholder=""
-								onChange={(e) => setEnquiries(e.target.value)}
+								onChange={(e) =>
+									setEnquiries(e.target.value)
+								}
 								required
 							/>
 						</div>
@@ -228,12 +181,6 @@ function InspectionAdd() {
 								type="submit">
 								Submit
 							</button>
-                            {/* <button
-                            onClick={() => downLoadPdf()}
-								class="bg-red-600 mx-32 mt-4 hover:bg-red-600 text-white font-bold py-2 px-16 rounded"
-								type="submit">
-								Get Reoprt
-							</button> */}
 						</div>
 					</form>
 				</div>

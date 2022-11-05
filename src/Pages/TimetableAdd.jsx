@@ -7,6 +7,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Notification from "../Components/Notification";
 
 function TimetableAdd() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -14,6 +15,12 @@ function TimetableAdd() {
 	const toggle = () => {
 		setIsOpen(!isOpen);
 	};
+
+	const [notify, setNotify] = useState({
+		isOpen: false,
+		message: "",
+		type: "",
+	});
 
 	const [open, setOpen] = useState(false);
 
@@ -30,18 +37,15 @@ function TimetableAdd() {
 	const [date, setDate] = useState(new Date());
 	const [startLocation, setStartLocation] = useState("");
 	const [EndLocation, setEndLocation] = useState("");
+	const [timetable, setTimetable] = useState("");
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
 
-		console.log(localStorage.getItem("authToken"));
 
 		try {
 			await axios
 				.post("http://localhost:5000/api/busroutes/add", {
-					headers: {
-						authToken: localStorage.getItem("authToken"),
-					},
 					
 					vehicleNo: vehicleNo,
 					routeId: routeId,
@@ -51,8 +55,15 @@ function TimetableAdd() {
 					EndLocation: EndLocation,
 				})
 				.then((res) => {
-					console.log("Assign Timetable", res);
-					navigate("/Timetable/all");
+					setNotify({
+						isOpen: true,
+						message: "Bus route timetable added successfully",
+						type: "success",
+					});
+					setInterval(() => {
+						navigate("/busroutes/all");
+					}, 2500);
+
 				})
 				.catch((err) => {
 					console.log(err);
@@ -75,7 +86,7 @@ function TimetableAdd() {
 					<form
 						className="bg-white rounded px-8 pt-6 pb-8 mb-8 shadow-md"
 						onSubmit={onSubmit}>
-						<div class="mb-6">
+						{/* <div class="mb-6">
 							<label
 								class="block text-gray-700 text-sm font-bold mb-2 text-left"
 								for="Timetable ID">
@@ -91,7 +102,7 @@ function TimetableAdd() {
 								}
 								required
 							/>
-						</div>
+						</div> */}
 
 						<div class="mb-6">
 							<label
@@ -194,32 +205,32 @@ function TimetableAdd() {
 								<option value="Select the Test Name You want to do">
 									Select The Start Location{" "}
 								</option>
-								<option value="Blood Sugar">
+								<option value="Kaduwela">
 									Kaduwela
 								</option>
-								<option value="PSA">Hanwella</option>
-								<option value="Sputin-For-FAB">
+								<option value="Hanwella">Hanwella</option>
+								<option value="Kirindiwela">
 									Kirindiwela
 								</option>
-								<option value="Cardiac-Profile">
+								<option value="Homagama">
 									Homagama
 								</option>
-								<option value="ESR">Padukka</option>
-								<option value="GGT">Pitakotuwa</option>
-								<option value="Iron Study">Gampaha</option>
-								<option value="Platelet Count">
+								<option value="Padukka">Padukka</option>
+								<option value="Pettah">Pettah</option>
+								<option value="Gampaha">Gampaha</option>
+								<option value="Panadura">
 									Panadura
 								</option>
-								<option value="Renai Profile">
+								<option value="Kandy">
 									Kandy
 								</option>
-								<option value="Urine Routine">
+								<option value="Kurunagala">
 									Kurunagala
 								</option>
-								<option value="Serum Chemistry">
+								<option value="Nittabuwa">
 									Nittabuwa
 								</option>
-								<option value="HCV">Aissawella</option>
+								<option value="Aissawella">Aissawella</option>
 							</select>
 						</div>
 
@@ -241,32 +252,32 @@ function TimetableAdd() {
 								<option value="Select the Test Name You want to do">
 									Select The End Location{" "}
 								</option>
-								<option value="Blood Sugar">
+								<option value="Kaduwela">
 									Kaduwela
 								</option>
-								<option value="PSA">Hanwella</option>
-								<option value="Sputin-For-FAB">
+								<option value="Hanwella">Hanwella</option>
+								<option value="Kirindiwela">
 									Kirindiwela
 								</option>
-								<option value="Cardiac-Profile">
+								<option value="Homagama">
 									Homagama
 								</option>
-								<option value="ESR">Padukka</option>
-								<option value="GGT">Pitakotuwa</option>
-								<option value="Iron Study">Gampaha</option>
-								<option value="Platelet Count">
+								<option value="Padukka">Padukka</option>
+								<option value="Pettah">Pettah</option>
+								<option value="Gampaha">Gampaha</option>
+								<option value="Panadura">
 									Panadura
 								</option>
-								<option value="Renai Profile">
+								<option value="Kandy">
 									Kandy
 								</option>
-								<option value="Urine Routine">
+								<option value="Kurunagala">
 									Kurunagala
 								</option>
-								<option value="Serum Chemistry">
+								<option value="Nittabuwa">
 									Nittabuwa
 								</option>
-								<option value="HCV">Aissawella</option>
+								<option value="Aissawella">Aissawella</option>
 							</select>
 						</div>
 
@@ -276,17 +287,13 @@ function TimetableAdd() {
 								type="submit">
 								Submit
 							</button>
-							{/* <button
-                            onClick={() => downLoadPdf()}
-								class="bg-red-600 mx-32 mt-4 hover:bg-red-600 text-white font-bold py-2 px-16 rounded"
-								type="submit">
-								Get Reoprt
-							</button> */}
+							
 						</div>
 					</form>
 				</div>
 			</div>
 			<Footer />
+			<Notification notify={notify} setNotify={setNotify} />
 		</>
 	);
 }

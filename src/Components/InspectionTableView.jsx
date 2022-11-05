@@ -52,6 +52,11 @@ const InspectionTableView = () => {
 		doc.save("All Inspection Details");
 	};
 
+
+	const updateForm = () => {
+navigate("/inspections")
+	}
+
 	return (
 		<>
 			<div class="overflow-x-auto">
@@ -220,14 +225,22 @@ const InspectionTableView = () => {
 								</div>
 							</div>
 						</>
-						<div class="text-center lg:text-right mt-10">
+						<div class="text-center cols-1 lg:text-right mt-10">
 							<button
 								onClick={() => downLoadPdf()}
-								class="bg-red-600 mx-[268px] mt-4 hover:bg-red-600 text-white font-bold py-2 px-16 rounded"
+								class="bg-red-600 cols-2 mx-[268px] mt-4 hover:bg-red-600 text-white font-bold py-2 px-16 rounded"
+								type="submit">
+								Get Report
+							</button>
+							<button
+								onClick={() => updateForm
+								()}
+								class="bg-red-600 cols-2 mx-[268px] mt-4 hover:bg-red-600 text-white font-bold py-2 px-16 rounded"
 								type="submit">
 								Get Report
 							</button>
 						</div>
+						
 					</div>
 				</div>
 			</div>

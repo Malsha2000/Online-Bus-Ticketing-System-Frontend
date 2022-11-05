@@ -8,7 +8,9 @@ import InspectionStart from "../Pages/InspectionStart";
 import InspectionList from "../Pages/Inspection/InspectionList";
 import InspectionTable from "../Pages/Inspection/InspectionTable";
 import UpdateInspection from "../Pages/Inspection/UpdateInsception";
-
+import TimetableAdd from "../Pages/TimetableAdd";
+import TimetableTable from "../Pages/Timetable/TimetableTable";
+import UpdateTimetable from "../Pages/Timetable/UpdateTimetable";
 
 const PageRoutes = () => {
 	return (
@@ -25,6 +27,9 @@ const PageRoutes = () => {
                             path="/inspection/update/:id"
                             element={<UpdateInspection />}
                         />
+						<Route path='/busroutes/add' element={<TimetableAdd/>}></Route>
+						<Route path="/busroutes/all" element={<TimetableTable />} />
+						<Route path="/busroutes/update/:id" element={<UpdateTimetable />} />
 				</Routes>
 			</BrowserRouter>
 		</div>

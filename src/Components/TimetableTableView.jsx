@@ -170,7 +170,7 @@ const TimetableTableView = () => {
 												<th class="py-3 px-6 text-center">
 												
 										<button
-											onClick={() => downLoadPdf()}
+											
 											class="bg-red-600 mx-32 mt-4 hover:bg-red-600 text-white font-bold py-2 px-16 rounded"
 											type="submit"
 											onClick={addTimetable}>

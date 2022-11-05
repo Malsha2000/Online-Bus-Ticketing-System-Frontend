@@ -7,6 +7,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Notification from "../Components/Notification";
 
 function InspectionAdd() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -43,7 +44,6 @@ function InspectionAdd() {
 		try {
 			await axios
 				.post("http://localhost:5000/api/inspection/add", {
-					inspectionID: inspectionID,
 					routeId: routeId,
 					time: time,
 					date: date,
@@ -102,7 +102,7 @@ function InspectionAdd() {
 							/>
 						</div>
 
-						<div class="mb-6">
+						<div class="mb-6 w-full">
 							<label
 								class="block text-gray-700 text-sm font-bold mb-2 text-left"
 								for="LastName">
@@ -186,6 +186,7 @@ function InspectionAdd() {
 				</div>
 			</div>
 			<Footer />
+			<Notification notify={notify} setNotify={setNotify} />
 		</>
 	);
 }

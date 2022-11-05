@@ -8,6 +8,7 @@ import InspectionStart from "../Pages/InspectionStart";
 import InspectionList from "../Pages/Inspection/InspectionList";
 import InspectionTable from "../Pages/Inspection/InspectionTable";
 import UpdateInspection from "../Pages/Inspection/UpdateInsception";
+import AdminDashboard from "../Pages/Admin/index";
 
 const PageRoutes = () => {
 	return (
@@ -34,6 +35,10 @@ const PageRoutes = () => {
 						path="/inspection/update/:id"
 						element={<UpdateInspection />}
 					/>
+					<Route
+							path="/admin"
+							element={<AdminDashboard />}
+						/>
 				</Routes>
 			</BrowserRouter>
 		</div>

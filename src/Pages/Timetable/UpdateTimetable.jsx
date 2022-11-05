@@ -7,7 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Notification from "../../Components/Notification/index";
 
-function UpdateInspection() {
+function UpdateTimetable() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [notify, setNotify] = useState({
 		isOpen: false,
@@ -45,7 +45,7 @@ function UpdateInspection() {
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		const data = {
-			
+			timetableID:timetableID,
 			vehicleNo: vehicleNo,
 			routeId: routeId,
 			time: time,
@@ -56,9 +56,7 @@ function UpdateInspection() {
 		try {
 			await axios
 				.put("http://localhost:5000/api/busroutes/update/" + id, {
-					// headers: {
-					//     authToken: localStorage.getItem("authToken"),
-					// },
+					
 					timetableID,
 					vehicleNo,
 					routeId,
@@ -212,32 +210,32 @@ function UpdateInspection() {
 								<option value="Select the Test Name You want to do">
 									Select The Start Location{" "}
 								</option>
-								<option value="Blood Sugar">
+								<option value="Kaduwela">
 									Kaduwela
 								</option>
-								<option value="PSA">Hanwella</option>
-								<option value="Sputin-For-FAB">
+								<option value="Hanwella">Hanwella</option>
+								<option value="Kirindiwela">
 									Kirindiwela
 								</option>
-								<option value="Cardiac-Profile">
+								<option value="Homagama">
 									Homagama
 								</option>
-								<option value="ESR">Padukka</option>
-								<option value="GGT">Pitakotuwa</option>
-								<option value="Iron Study">Gampaha</option>
-								<option value="Platelet Count">
+								<option value="Padukka">Padukka</option>
+								<option value="Pettah">Pettah</option>
+								<option value="Gampaha">Gampaha</option>
+								<option value="Panadura">
 									Panadura
 								</option>
-								<option value="Renai Profile">
+								<option value="Kandy">
 									Kandy
 								</option>
-								<option value="Urine Routine">
+								<option value="Kurunagala">
 									Kurunagala
 								</option>
-								<option value="Serum Chemistry">
+								<option value="Nittabuwa">
 									Nittabuwa
 								</option>
-								<option value="HCV">Aissawella</option>
+								<option value="Aissawella">Aissawella</option>
 							</select>
 						</div>
 
@@ -259,32 +257,32 @@ function UpdateInspection() {
 								<option value="Select the Test Name You want to do">
 									Select The End Location{" "}
 								</option>
-								<option value="Blood Sugar">
+								<option value="Kaduwela">
 									Kaduwela
 								</option>
-								<option value="PSA">Hanwella</option>
-								<option value="Sputin-For-FAB">
+								<option value="Hanwella">Hanwella</option>
+								<option value="Kirindiwela">
 									Kirindiwela
 								</option>
-								<option value="Cardiac-Profile">
+								<option value="Homagama">
 									Homagama
 								</option>
-								<option value="ESR">Padukka</option>
-								<option value="GGT">Pitakotuwa</option>
-								<option value="Iron Study">Gampaha</option>
-								<option value="Platelet Count">
+								<option value="Padukka">Padukka</option>
+								<option value="Pettah">Pettah</option>
+								<option value="Gampaha">Gampaha</option>
+								<option value="Panadura">
 									Panadura
 								</option>
-								<option value="Renai Profile">
+								<option value="Kandy">
 									Kandy
 								</option>
-								<option value="Urine Routine">
+								<option value="Kurunagala">
 									Kurunagala
 								</option>
-								<option value="Serum Chemistry">
+								<option value="Nittabuwa">
 									Nittabuwa
 								</option>
-								<option value="HCV">Aissawella</option>
+								<option value="Aissawella">Aissawella</option>
 							</select>
 						</div>
 
@@ -304,4 +302,4 @@ function UpdateInspection() {
 	);
 }
 
-export default UpdateInspection;
+export default UpdateTimetable;

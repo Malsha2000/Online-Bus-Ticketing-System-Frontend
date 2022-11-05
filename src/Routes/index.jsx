@@ -21,7 +21,13 @@ const PageRoutes = () => {
 					<Route path="/" element={<Login />}></Route>
 					<Route path="/user/add" element={<Register />}></Route>
 					<Route
-						path="/inspection/add"
+                            path="/inspection/update/:id"
+                            element={<UpdateInspection />}
+                        />
+						<Route path='/busroutes/add' element={<TimetableAdd/>}></Route>
+						<Route path="/busroutes/all" element={<TimetableTable />} />
+						<Route path="/busroutes/update/:id" element={<UpdateTimetable />} />
+						<Route path="/inspection/add"
 						element={<InspectionAdd />}></Route>
 					<Route
 						path="/inspection/card"
@@ -34,18 +40,7 @@ const PageRoutes = () => {
 						path="/inspection/all"
 						element={<InspectionTable />}
 					/>
-					<Route
-						path="/inspection/update/:id"
-						element={<UpdateInspection />}
-					/>
-					<Route
-                            path="/inspection/update/:id"
-                            element={<UpdateInspection />}
-                        />
-						<Route path='/busroutes/add' element={<TimetableAdd/>}></Route>
-						<Route path="/busroutes/all" element={<TimetableTable />} />
-						<Route path="/busroutes/update/:id" element={<UpdateTimetable />} />
-							path="/admin"
+						<Route path="/admin"
 							element={<AdminDashboard />}
 						/>
 				</Routes>

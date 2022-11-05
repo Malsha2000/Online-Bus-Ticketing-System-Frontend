@@ -46,6 +46,11 @@ const TimetableTableView = () => {
 		{ title: "Start Location", field: "startLocation" },
 		{ title: "End Location", field: "endLocation" },
 	];
+	const addTimetable = () => {
+        const path = `/busroutes/add`;
+        navigate(path);
+    };
+
 
 	const downLoadPdf = () => {
 		const doc = new jsPDF();
@@ -91,26 +96,39 @@ const TimetableTableView = () => {
 		subTitle: "",
 	});
 
-	const handleUpdate = async (
-		id,
-		e,
-		timetableID,
-		vehicleNo,
-		routeId,
-		time,
-		date,
-		startLocation,
-		EndLocation,
-	) => {
-		navigate(`http://localhost:5000/api/busroutes/update/${id}`, {
+	// const handleUpdate = async (
+	// 	id,
+	// 	e,
+	// 	timetableID,
+	// 	vehicleNo,
+	// 	routeId,
+	// 	time,
+	// 	date,
+	// 	startLocation,
+	// 	EndLocation,
+	// ) => {
+	// 	navigate(`busroutes/update/${id}`, {
+	// 		state: {
+	// 			timetableID: timetableID,
+	// 			vehicleNo: vehicleNo,
+	// 			routeId: routeId,
+	// 			time: time,
+	// 			date: date,
+	// 			startLocation: startLocation,
+	// 			EndLocation: EndLocation,
+	// 		},
+	// 	});
+	// };
+
+	const handleUpdate = () => {
+		navigate(`/busroutes/update/${timetable._id}`, {
 			state: {
-				timetableID: timetableID,
-				vehicleNo: vehicleNo,
-				routeId: routeId,
-				time: time,
-				date: date,
-				startLocation: startLocation,
-				EndLocation: EndLocation,
+				inspectionId: timetable.inspectionId,
+				routeId: timetable.routeId,
+				date: timetable.date,
+				time: timetable.time,
+				inspectorName: timetable.inspectorName,
+				enquiries: timetable.enquiries,
 			},
 		});
 	};
@@ -121,6 +139,7 @@ const TimetableTableView = () => {
 				<div class="min-w-screen min-h-fit flex justify-center font-sans overflow-hidden mt-5 mb-10">
 					<div class="w-full lg:w-5/6 h-fit">
 						<>
+						
 							<div class="flex justify-center items-center  ">
 								<div class="bg-white shadow-md rounded-2xl w-fit ">
 									<table class="min-w-5/6 w-full table-auto">
@@ -147,6 +166,23 @@ const TimetableTableView = () => {
 												</th>
 												<th class="py-3 px-6 text-center">
 													End Location
+												</th>
+												<th class="py-3 px-6 text-center">
+												
+										<button
+											
+											class="bg-red-600 mx-32 mt-4 hover:bg-red-600 text-white font-bold py-2 px-16 rounded"
+											type="submit"
+											onClick={addTimetable}>
+											Add New Timetable
+										</button>
+									
+												</th>
+												<th class="py-3 px-6 text-center">
+													
+												</th>
+												<th class="py-3 px-6 text-center">
+													
 												</th>
                                                 
 											</tr>
@@ -378,10 +414,6 @@ const TimetableTableView = () => {
 																	}>
 																	Edit
 																</EditOutlined>
-															</div>
-														</td>
-														<td class="py-3 px-6 text-center">
-															<div class="flex items-center justify-center">
 																<DeleteOutlined
 																	className="text-red-800 text-lg pl-5 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110"
 																	onClick={() => {
@@ -403,7 +435,7 @@ const TimetableTableView = () => {
 																/>
 															</div>
 														</td>
-
+														
 														<td class="py-3 px-6 text-center">
 															<div class="flex items-center justify-center">
 																<div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"></div>

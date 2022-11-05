@@ -40,12 +40,7 @@ const PageRoutes = () => {
 						path="/inspection/all"
 						element={<InspectionTable />}
 					/>
-					<Route
-						path="/inspection/update/:id"
-						element={<UpdateInspection />}
-					/>
-					<Route
-							path="/admin"
+						<Route path="/admin"
 							element={<AdminDashboard />}
 						/>
 				</Routes>

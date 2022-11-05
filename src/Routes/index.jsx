@@ -8,6 +8,9 @@ import InspectionStart from "../Pages/InspectionStart";
 import InspectionList from "../Pages/Inspection/InspectionList";
 import InspectionTable from "../Pages/Inspection/InspectionTable";
 import UpdateInspection from "../Pages/Inspection/UpdateInsception";
+import TimetableAdd from "../Pages/TimetableAdd";
+import TimetableTable from "../Pages/Timetable/TimetableTable";
+import UpdateTimetable from "../Pages/Timetable/UpdateTimetable";
 import AdminDashboard from "../Pages/Admin/index";
 
 const PageRoutes = () => {
@@ -18,7 +21,13 @@ const PageRoutes = () => {
 					<Route path="/" element={<Login />}></Route>
 					<Route path="/user/add" element={<Register />}></Route>
 					<Route
-						path="/inspection/add"
+                            path="/inspection/update/:id"
+                            element={<UpdateInspection />}
+                        />
+						<Route path='/busroutes/add' element={<TimetableAdd/>}></Route>
+						<Route path="/busroutes/all" element={<TimetableTable />} />
+						<Route path="/busroutes/update/:id" element={<UpdateTimetable />} />
+						<Route path="/inspection/add"
 						element={<InspectionAdd />}></Route>
 					<Route
 						path="/inspection/card"
@@ -31,12 +40,7 @@ const PageRoutes = () => {
 						path="/inspection/all"
 						element={<InspectionTable />}
 					/>
-					<Route
-						path="/inspection/update/:id"
-						element={<UpdateInspection />}
-					/>
-					<Route
-							path="/admin"
+						<Route path="/admin"
 							element={<AdminDashboard />}
 						/>
 				</Routes>

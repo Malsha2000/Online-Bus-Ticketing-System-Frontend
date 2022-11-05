@@ -7,7 +7,7 @@ const AdminDashboard = () => {
 
     return (
 		<>
-			<div className="bg-main-blue">
+			<div className="bg-white">
                 <Header/>
 				<div className="flex justify-center items-center">
 				<Dashboard />

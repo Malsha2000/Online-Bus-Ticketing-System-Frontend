@@ -1,4 +1,5 @@
 import React from "react";
+import logo from "../Assests/logo.PNG"
 
 const Footer = () => {
 	return (
@@ -6,9 +7,15 @@ const Footer = () => {
 			<div class="md:flex md:justify-between">
 				<div class="mb-6 md:mb-0">
 					<a href="" class="flex items-center">
-						<span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-							RapiDo
-						</span>
+					{/* <img src="" class="mr-3 h-8" alt="FlowBite Logo" /> */}
+					<img
+															src={
+																logo
+															}
+															className=" h-32 w-35"
+															alt="tute"
+														/>
+						
 					</a>
 				</div>
 				<div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">

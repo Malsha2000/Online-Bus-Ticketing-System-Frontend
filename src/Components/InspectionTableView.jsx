@@ -39,9 +39,6 @@ const InspectionTableView = () => {
 		{ title: "Inspector Name", field: "inspectorName" },
 	];
 
-
-
-
 	const downLoadPdf = () => {
 		const doc = new jsPDF();
 		doc.text(" All Inspection Details", 50, 10);
@@ -220,17 +217,17 @@ const InspectionTableView = () => {
 											)}
 										</tbody>
 									</table>
-									<div class="text-center lg:text-right mt-10">
-										<button
-											onClick={() => downLoadPdf()}
-											class="bg-red-600 mx-32 mt-4 hover:bg-red-600 text-white font-bold py-2 px-16 rounded"
-											type="submit">
-											Get Reoprt
-										</button>
-									</div>
 								</div>
 							</div>
 						</>
+						<div class="text-center lg:text-right mt-10">
+							<button
+								onClick={() => downLoadPdf()}
+								class="bg-red-600 mx-[268px] mt-4 hover:bg-red-600 text-white font-bold py-2 px-16 rounded"
+								type="submit">
+								Get Report
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>

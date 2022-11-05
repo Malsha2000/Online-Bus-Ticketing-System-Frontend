@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Login from "../Components/LoginForm";
-import Register from '../Pages/Register'
+import Register from "../Pages/Register";
 import InspectionAdd from "../Pages/inspectionAdd";
 import InspectionStart from "../Pages/InspectionStart";
 import InspectionList from "../Pages/Inspection/InspectionList";
@@ -11,6 +11,7 @@ import UpdateInspection from "../Pages/Inspection/UpdateInsception";
 import TimetableAdd from "../Pages/TimetableAdd";
 import TimetableTable from "../Pages/Timetable/TimetableTable";
 import UpdateTimetable from "../Pages/Timetable/UpdateTimetable";
+import AdminDashboard from "../Pages/Admin/index";
 
 const PageRoutes = () => {
 	return (
@@ -18,11 +19,25 @@ const PageRoutes = () => {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Login />}></Route>
-					<Route path='/user/add' element={<Register/>}></Route>
-					<Route path='/inspection/add' element={<InspectionAdd/>}></Route>
-					<Route path='/inspection/card' element={<InspectionStart/>}></Route>
-					<Route path="/inspections" element={<InspectionList />} />
-					<Route path="/inspection/all" element={<InspectionTable />} />
+					<Route path="/user/add" element={<Register />}></Route>
+					<Route
+						path="/inspection/add"
+						element={<InspectionAdd />}></Route>
+					<Route
+						path="/inspection/card"
+						element={<InspectionStart />}></Route>
+					<Route
+						path="/inspections"
+						element={<InspectionList />}
+					/>
+					<Route
+						path="/inspection/all"
+						element={<InspectionTable />}
+					/>
+					<Route
+						path="/inspection/update/:id"
+						element={<UpdateInspection />}
+					/>
 					<Route
                             path="/inspection/update/:id"
                             element={<UpdateInspection />}
@@ -30,6 +45,9 @@ const PageRoutes = () => {
 						<Route path='/busroutes/add' element={<TimetableAdd/>}></Route>
 						<Route path="/busroutes/all" element={<TimetableTable />} />
 						<Route path="/busroutes/update/:id" element={<UpdateTimetable />} />
+							path="/admin"
+							element={<AdminDashboard />}
+						/>
 				</Routes>
 			</BrowserRouter>
 		</div>

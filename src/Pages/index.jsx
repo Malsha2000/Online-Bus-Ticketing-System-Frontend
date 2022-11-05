@@ -8,6 +8,7 @@ import UpdateInspection from "./Inspection/UpdateInsception";
 import TimetableAdd from "./TimetableAdd";
 import TimetableTable from "./Timetable/TimetableTable";
 import UpdateTimetable from "./Timetable/UpdateTimetable";
+import AdminDashboard from "./Admin/index";
 
 export {
     
@@ -21,5 +22,6 @@ export {
     TimetableAdd,
     TimetableTable,
     UpdateTimetable,
+    AdminDashboard,
 
 };

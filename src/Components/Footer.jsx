@@ -5,11 +5,9 @@ const Footer = () => {
 		<footer class="p-4 bg-white sm:p-6 dark:bg-red-900">
 			<div class="md:flex md:justify-between">
 				<div class="mb-6 md:mb-0">
-					<a
-						href=""
-						class="flex items-center">					
+					<a href="" class="flex items-center">
 						<span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-							CITY J7
+							RapiDo
 						</span>
 					</a>
 				</div>
@@ -31,7 +29,7 @@ const Footer = () => {
 							Follow us
 						</h2>
 						<ul class="text-red-600 dark:text-red-400">
-							<li class="mb-4">Github</li>
+							<li class="mb-4">Facebook</li>
 							<li>Discord</li>
 						</ul>
 					</div>
@@ -49,7 +47,7 @@ const Footer = () => {
 			<hr class="my-6 border-red-200 sm:mx-auto dark:border-red-700 lg:my-8" />
 			<div class="sm:flex sm:items-center sm:justify-between">
 				<span class="text-sm text-red-500 sm:text-center dark:text-red-400">
-					© 2022 CITY J7. All Rights Reserved.
+					© 2022 RapiDo J7. All Rights Reserved.
 				</span>
 				<div class="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
 					<a

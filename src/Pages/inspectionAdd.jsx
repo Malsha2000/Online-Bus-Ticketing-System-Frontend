@@ -71,6 +71,9 @@ function InspectionAdd() {
 		}
 	};
 
+
+
+
 	return (
 		<>
 			<Header toggle={toggle} />
@@ -97,9 +100,12 @@ function InspectionAdd() {
 								placeholder=""
 								onChange={(e) =>
 									setRouteId(e.target.value)
+									
 								}
+								
 								required
 							/>
+							
 						</div>
 
 						<div class="mb-6 w-full">

@@ -96,42 +96,42 @@ const TimetableTableView = () => {
 		subTitle: "",
 	});
 
-	// const handleUpdate = async (
-	// 	id,
-	// 	e,
-	// 	timetableID,
-	// 	vehicleNo,
-	// 	routeId,
-	// 	time,
-	// 	date,
-	// 	startLocation,
-	// 	EndLocation,
-	// ) => {
-	// 	navigate(`busroutes/update/${id}`, {
-	// 		state: {
-	// 			timetableID: timetableID,
-	// 			vehicleNo: vehicleNo,
-	// 			routeId: routeId,
-	// 			time: time,
-	// 			date: date,
-	// 			startLocation: startLocation,
-	// 			EndLocation: EndLocation,
-	// 		},
-	// 	});
-	// };
-
-	const handleUpdate = () => {
-		navigate(`/busroutes/update/${timetable._id}`, {
+	const handleUpdate = async (
+		id,
+		e,
+		timetableID,
+		vehicleNo,
+		routeId,
+		time,
+		date,
+		startLocation,
+		EndLocation,
+	) => {
+		navigate(`/busroutes/update/${id}`, {
 			state: {
-				inspectionId: timetable.inspectionId,
-				routeId: timetable.routeId,
-				date: timetable.date,
-				time: timetable.time,
-				inspectorName: timetable.inspectorName,
-				enquiries: timetable.enquiries,
+				timetableID: timetableID,
+				vehicleNo: vehicleNo,
+				routeId: routeId,
+				time: time,
+				date: date,
+				startLocation: startLocation,
+				EndLocation: EndLocation,
 			},
 		});
 	};
+
+	// const handleUpdate = () => {
+	// 	navigate(`/busroutes/update/${timetable._id}`, {
+	// 		state: {
+	// 			inspectionId: timetable.inspectionId,
+	// 			routeId: timetable.routeId,
+	// 			date: timetable.date,
+	// 			time: timetable.time,
+	// 			inspectorName: timetable.inspectorName,
+	// 			enquiries: timetable.enquiries,
+	// 		},
+	// 	});
+	// };
 
 	return (
 		<>

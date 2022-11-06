@@ -12,11 +12,13 @@ import TimetableAdd from "../Pages/TimetableAdd";
 import TimetableTable from "../Pages/Timetable/TimetableTable";
 import UpdateTimetable from "../Pages/Timetable/UpdateTimetable";
 import AdminDashboard from "../Pages/Admin/index";
+import Header from "../Components/Header";
 
 const PageRoutes = () => {
 	return (
 		<div>
 			<BrowserRouter>
+			
 				<Routes>
 					<Route path="/" element={<Login />}></Route>
 					<Route path="/user/add" element={<Register />}></Route>

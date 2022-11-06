@@ -62,7 +62,7 @@ const TimetableTableView = () => {
 			})),
 			body: timetable,
 		});
-		doc.save("All Inspection Details");
+		doc.save("All Timetable Details");
 	};
 
 	const handleDelete = (id) => {

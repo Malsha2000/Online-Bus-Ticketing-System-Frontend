@@ -1,19 +1,17 @@
 import React from "react";
-import logo from "../Assests/logo.PNG"
+import logo from "../Assests/logo.PNG";
 
 const Header = () => {
 	return (
-		<header>
+		<header className="border-b-4 border-red-900">
 			<nav class="bg-white border-red-200 px-4 lg:px-6 py-2.5 dark:bg-red-900">
 				<div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
 					<a href="#" class="flex items-center">
-					<img
-															src={
-																logo
-															}
-															className=" h-32 w-35"
-															alt="tute"
-														/>
+						<img
+							src={logo}
+							className=" h-32 w-35"
+							alt="tute"
+						/>
 					</a>
 					<div class="flex items-center lg:order-2">
 						<a
@@ -57,7 +55,7 @@ const Header = () => {
 							<li>
 								<a
 									href="#"
-									class="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
+									class="block py-2 pr-4 pl-3 text-red-700 rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-red-700"
 									aria-current="page">
 									Home
 								</a>

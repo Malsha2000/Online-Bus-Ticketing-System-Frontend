@@ -1,21 +1,18 @@
 import React from "react";
-import logo from "../Assests/logo.PNG"
+import logo from "../Assests/logo.PNG";
 
 const Footer = () => {
 	return (
-		<footer class="p-4 bg-white sm:p-6 dark:bg-red-900">
+		<footer class="p-4 bg-white sm:p-6 dark:bg-red-900 border-t-4 border-red-900">
 			<div class="md:flex md:justify-between">
 				<div class="mb-6 md:mb-0">
 					<a href="" class="flex items-center">
-					{/* <img src="" class="mr-3 h-8" alt="FlowBite Logo" /> */}
-					<img
-															src={
-																logo
-															}
-															className=" h-32 w-35"
-															alt="tute"
-														/>
-						
+						{/* <img src="" class="mr-3 h-8" alt="FlowBite Logo" /> */}
+						<img
+							src={logo}
+							className=" h-32 w-35"
+							alt="tute"
+						/>
 					</a>
 				</div>
 				<div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">

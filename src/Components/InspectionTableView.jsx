@@ -235,9 +235,9 @@ navigate("/inspections")
 							<button
 								onClick={() => updateForm
 								()}
-								class="bg-red-600 cols-2 mx-[268px] mt-4 hover:bg-red-600 text-white font-bold py-2 px-16 rounded"
+								class=" bg-green-600 cols-2 mx-[268px] mt-4 bg-green-600 text-white font-bold py-2 px-16 rounded"
 								type="submit">
-								Get Report
+								View
 							</button>
 						</div>
 						

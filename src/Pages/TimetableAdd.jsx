@@ -1,35 +1,10 @@
 import React, { useState } from "react";
-import Footer from "../Components/Footer";
-import Header from "../Components/Header";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import jsPDF from "jspdf";
-import "jspdf-autotable";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import Notification from "../Components/Notification";
+import swal from "sweetalert";
 
-function TimetableAdd() {
-	const [isOpen, setIsOpen] = useState(false);
-
-	const toggle = () => {
-		setIsOpen(!isOpen);
-	};
-
-	const [notify, setNotify] = useState({
-		isOpen: false,
-		message: "",
-		type: "",
-	});
-
-	const [open, setOpen] = useState(false);
-
-	const handletime = (newTime) => {
-		setTime(newTime);
-	};
-
-	const navigate = useNavigate();
-
+const AdvertiserForm = () => {
+	const [listOftimetable, setListOftimetable] = useState([]);
 	const [timetableID, setTimetableID] = useState("");
 	const [vehicleNo, setVehicleNo] = useState("");
 	const [routeId, setRouteId] = useState("");
@@ -38,264 +13,273 @@ function TimetableAdd() {
 	const [startLocation, setStartLocation] = useState("");
 	const [EndLocation, setEndLocation] = useState("");
 	const [timetable, setTimetable] = useState("");
+	const [errors, setErrors] = useState("");
+	const [formErrors, setFormErrors] = useState({});
+	const [isSubmit, setIsSubmit] = useState(false);
 
-	const onSubmit = async (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
+		setFormErrors(validate());
+		setIsSubmit(true);
+		sub();
+	};
 
+	const validate = () => {
+		const errors = {};
+		if (!vehicleNo) {
+			errors.vehicleNo = "vehicleNo is required!";
+		}
+		if (!routeId) {
+			errors.routeId = "routeId is required!";
+		}
+		if (!time) {
+			errors.time = "time is required!";
+		}
+		if (!date) {
+			errors.date = "date is required!";
+		}
 
-		try {
-			await axios
-				.post("http://localhost:5000/api/busroutes/add", {
-					
-					vehicleNo: vehicleNo,
-					routeId: routeId,
-					time: time,
-					date: date,
-					startLocation: startLocation,
-					EndLocation: EndLocation,
-				})
-				.then((res) => {
-					setNotify({
-						isOpen: true,
-						message: "Bus route timetable added successfully",
-						type: "success",
-					});
-					setInterval(() => {
-						navigate("/busroutes/all");
-					}, 2500);
+		if (!startLocation) {
+			errors.startLocation = "startLocation is required!";
+		}
+		if (!EndLocation) {
+			errors.EndLocation = "EndLocation is required!";
+		}
 
-				})
-				.catch((err) => {
-					console.log(err);
-				});
-		} catch (error) {
-			console.log(error);
+		return errors;
+	};
+
+	const sub = () => {
+		if (Object.keys(formErrors).length == 0 && isSubmit) {
+			createAd();
 		}
 	};
 
+	const createAd = () => {
+		axios
+			.post("http://localhost:5000/api/busroutes/add", {
+				vehicleNo,
+				routeId,
+				time,
+				date,
+				startLocation,
+				EndLocation,
+			})
+			.then((response) => {
+				setListOftimetable([
+					...listOftimetable,
+					{
+						vehicleNo,
+						routeId,
+						time,
+						date,
+						startLocation,
+						EndLocation,
+					},
+				]);
+			});
+		swal({
+			title: "Bus Routes Timetable Added Successfuly!",
+			icon: "success",
+			confirmButtonText: "OK",
+		}).then(function () {
+			// Redirect the user
+			window.location.href = "/busroutes/all";
+		});
+	};
+
 	return (
-		<>
-			<Header toggle={toggle} />
-			<div className="text-center py-5">
-				<h1 className="font-bold text-5xl text-black">
-					TIMETABLE DETAILS
-				</h1>
+		<div
+			className="text-center py-5"
+			style={{
+				backgroundSize: "cover",
+				backgroundRepeat: "no-repeat",
+			}}>
+			<br />
+			<h1
+				style={{
+					fontFamily: "Georgia",
+					fontSize: "100px",
+					textAlign: "center",
+					color: "white",
+				}}>
+				Timetable Form
+			</h1>
+			<br />
+			<div className="text-4xl text-bold text-black">
+			<h1>Bus Route Shedule Time Table</h1>
 			</div>
-			<div className="mx-96">
-				<div className="bg-gray-100 shadow-md rounded p-5 mb-10">
-					<form
-						className="bg-white rounded px-8 pt-6 pb-8 mb-8 shadow-md"
-						onSubmit={onSubmit}>
-						{/* <div class="mb-6">
-							<label
-								class="block text-gray-700 text-sm font-bold mb-2 text-left"
-								for="Timetable ID">
-								Timetable ID
-							</label>
-							<input
-								class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-1 focus:outline-red-300 focus:shadow-outline"
-								id="Timetable ID"
-								type="text"
-								placeholder=""
-								onChange={(e) =>
-									setTimetableID(e.target.value)
-								}
-								required
-							/>
-						</div> */}
+			<div style={{ backgroundColor: "black" }}></div>
+			<div
+				className="col-md-8 mt-4 mx-auto"
+				style={{
+					fontWeight: "bold",
+					fontFamily: "sans-serif",
+					borderRadius: "30px",
+					border: "3px solid red",
+					margin: "2px",
+				}}>
+				<br />
+				
+				<form style={{ margin: "20px" }}>
+					<br />
 
-						<div class="mb-6">
-							<label
-								class="block text-gray-700 text-sm font-bold mb-2 text-left"
-								for="Vehicle No">
-								Vehicle No.
-							</label>
+					<div className="row mb-3">
+						<label
+							class="col-sm-2 col-form-label"
+							style={{ color: "#000000" }}>
+							Vehicle No.
+						</label>
+						<div className="col-sm-10">
 							<input
-								class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-1 focus:outline-red-300 focus:shadow-outline"
-								id="Vehicle No"
+								style={{ backgroundColor: "#D3D3D3" }}
 								type="text"
-								placeholder=""
-								onChange={(e) =>
-									setVehicleNo(e.target.value)
-								}
+								className="form-control"
 								required
-							/>
-						</div>
-						<div class="mb-6">
-							<label
-								class="block text-gray-700 text-sm font-bold mb-2 text-left"
-								for="Route ID">
-								Route ID
-							</label>
-							<input
-								class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-1 focus:outline-red-300 focus:shadow-outline"
-								id="Route ID"
-								type="text"
-								placeholder=""
-								onChange={(e) =>
-									setRouteId(e.target.value)
-								}
-								required
-							/>
-						</div>
-
-						<div class="mb-6">
-							<label
-								class="block text-gray-700 text-sm font-bold mb-2 text-left"
-								for="LastName">
-								Date
-							</label>
-							<DatePicker
-								selected={date}
-								onChange={(date) => setDate(date)}
-								style={{
-									background: "transparent",
-									border: "none",
-									borderBottom: "2px solid #265673",
-									marginTop: "10px",
-									width: "100%",
-									color: "#265673",
+								onChange={(e) => {
+									setVehicleNo(e.target.value);
 								}}
 							/>
-							{/* <DatePicker selected={date} onChange={(start_date:Date) => setDate(date)} /> */}
-							{/* <input
-								class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-1 focus:outline-red-300 focus:shadow-outline"
-								id="lastname"
-								type="text"
-								placeholder=""
-								onChange={(e) =>
-									setDate(e.target.value)
-								}
-								required
-							/> */}
+							<p class="alert-txt" style={{ color: "red" }}>
+								{formErrors.vehicleNo}
+							</p>
 						</div>
-						<div class="mb-6">
-							<label
-								class="block text-gray-700 text-sm font-bold mb-2 text-left"
-								for="email">
-								Time
-							</label>
-
+					</div>
+					<div className="row mb-3">
+						<label
+							class="col-sm-2 col-form-label"
+							style={{ color: "#000000" }}>
+							Route ID
+						</label>
+						<div className="col-sm-10">
 							<input
-								class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-1 focus:outline-red-300 focus:shadow-outline"
-								id="email"
+								style={{ backgroundColor: "#D3D3D3" }}
 								type="text"
-								placeholder=""
-								onChange={(e) => setTime(e.target.value)}
+								className="form-control"
 								required
+								onChange={(e) => {
+									setRouteId(e.target.value);
+								}}
 							/>
+							<p class="alert-txt" style={{ color: "red" }}>
+								{formErrors.routeId}
+							</p>
 						</div>
+					</div>
 
-						<div class="mb-6">
-							<label
-								class="block text-gray-700 text-sm font-bold mb-2 text-left"
-								for="StartLocation">
-								Start Location
-							</label>
-
-							<select
-								class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-1 focus:outline-red-300 focus:shadow-outline"
-								id="StartLocation"
+					<div className="row mb-3">
+						<label
+							for="inputEmail3"
+							class="col-sm-2 col-form-label"
+							style={{ color: "#000000" }}>
+							Time
+						</label>
+						<div className="col-sm-10">
+							<input
+								style={{ backgroundColor: "#D3D3D3" }}
 								type="text"
-								placeholder=""
-								onChange={(e) =>
-									setStartLocation(e.target.value)
-								}
-								required>
-								<option value="Select the Test Name You want to do">
-									Select The Start Location{" "}
-								</option>
-								<option value="Kaduwela">
-									Kaduwela
-								</option>
-								<option value="Hanwella">Hanwella</option>
-								<option value="Kirindiwela">
-									Kirindiwela
-								</option>
-								<option value="Homagama">
-									Homagama
-								</option>
-								<option value="Padukka">Padukka</option>
-								<option value="Pettah">Pettah</option>
-								<option value="Gampaha">Gampaha</option>
-								<option value="Panadura">
-									Panadura
-								</option>
-								<option value="Kandy">
-									Kandy
-								</option>
-								<option value="Kurunagala">
-									Kurunagala
-								</option>
-								<option value="Nittabuwa">
-									Nittabuwa
-								</option>
-								<option value="Aissawella">Aissawella</option>
-							</select>
+								className="form-control"
+								required
+								onChange={(e) => {
+									setTime(e.target.value);
+								}}
+							/>
+							<p class="alert-txt" style={{ color: "red" }}>
+								{formErrors.time}
+							</p>
 						</div>
-
-						<div class="mb-6">
-							<label
-								class="block text-gray-700 text-sm font-bold mb-2 text-left"
-								for="End Location">
-								End Location
-							</label>
-							<select
-								class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-1 focus:outline-red-300 focus:shadow-outline"
-								id="EndLocation"
+					</div>
+					<div className="row mb-3">
+						<label
+							for="inputEmail3"
+							class="col-sm-2 col-form-label"
+							style={{ color: "#000000" }}>
+							Date
+						</label>
+						<div className="col-sm-10">
+							<input
+								style={{ backgroundColor: "#D3D3D3" }}
 								type="text"
-								placeholder=""
-								onChange={(e) =>
-									setEndLocation(e.target.value)
-								}
-								required>
-								<option value="Select the Test Name You want to do">
-									Select The End Location{" "}
-								</option>
-								<option value="Kaduwela">
-									Kaduwela
-								</option>
-								<option value="Hanwella">Hanwella</option>
-								<option value="Kirindiwela">
-									Kirindiwela
-								</option>
-								<option value="Homagama">
-									Homagama
-								</option>
-								<option value="Padukka">Padukka</option>
-								<option value="Pettah">Pettah</option>
-								<option value="Gampaha">Gampaha</option>
-								<option value="Panadura">
-									Panadura
-								</option>
-								<option value="Kandy">
-									Kandy
-								</option>
-								<option value="Kurunagala">
-									Kurunagala
-								</option>
-								<option value="Nittabuwa">
-									Nittabuwa
-								</option>
-								<option value="Aissawella">Aissawella</option>
-							</select>
+								className="form-control"
+								required
+								onChange={(e) => {
+									setDate(e.target.value);
+								}}
+							/>
+							<p class="alert-txt" style={{ color: "red" }}>
+								{formErrors.date}
+							</p>
 						</div>
+					</div>
+					<div className="row mb-3">
+						<label
+							for="inputEmail3"
+							class="col-sm-2 col-form-label"
+							style={{ color: "#000000" }}>
+							Start Location
+						</label>
+						<div className="col-sm-10">
+							<input
+								style={{ backgroundColor: "#D3D3D3" }}
+								type="text"
+								className="form-control"
+								required
+								onChange={(e) => {
+									setStartLocation(e.target.value);
+								}}
+							/>
+							<p class="alert-txt" style={{ color: "red" }}>
+								{formErrors.startLocation}
+							</p>
+						</div>
+					</div>
+					<div className="row mb-3">
+						<label
+							for="inputEmail3"
+							class="col-sm-2 col-form-label"
+							style={{ color: "#000000" }}>
+							End Location
+						</label>
+						<div className="col-sm-10">
+							<input
+								style={{ backgroundColor: "#D3D3D3" }}
+								type="text"
+								className="form-control"
+								required
+								onChange={(e) => {
+									setEndLocation(e.target.value);
+								}}
+							/>
+							<p class="alert-txt" style={{ color: "red" }}>
+								{formErrors.EndLocation}
+							</p>
+						</div>
+					</div>
 
-						<div class="flex w-full items-center justify-center bg-grey-lighter">
-							<button
-								class="bg-red-600 mx-32 mt-4 hover:bg-red-600 text-white font-bold py-2 px-16 rounded"
-								type="submit">
-								Submit
-							</button>
-							
-						</div>
-					</form>
-				</div>
+					<div class="row justify-content-end" id="add-btn">
+						<center>
+							<Link to="/busroutes/all">
+								{" "}
+								<button
+									type="button"
+									onClick={handleSubmit}
+									class="btn-block btn-primary"
+									style={{
+										backgroundColor: "#1bb004",
+										padding: "5px",
+										display: "flex",
+										alignItems: "center",
+										justifyContent: "center",
+									}}>
+									Submit
+								</button>
+							</Link>{" "}
+						</center>
+					</div>
+				</form>
 			</div>
-			<Footer />
-			<Notification notify={notify} setNotify={setNotify} />
-		</>
+		</div>
 	);
-}
+};
 
-export default TimetableAdd;
+export default AdvertiserForm;
